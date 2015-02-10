@@ -1,7 +1,14 @@
 package com.uwaterloo.fydp.structure;
 
-/**
- * Created by Anthony on 15-02-10.
- */
-public class Envelope {
+public class Envelope<T> {
+    private Metadata metadata;
+    T result;
+
+    public Metadata getMetadata() {
+        return metadata;
+    }
+
+    public T getResult() {
+        return result;
+    }
 }
