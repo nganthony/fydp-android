@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/fydp-android.iml" filepath="$PROJECT_DIR$/fydp-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/fydp-android-lib/fydp-android-lib.iml" filepath="$PROJECT_DIR$/fydp-android-lib/fydp-android-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imageloader-core-1.6.1/imageloader-core-1.6.1.iml" filepath="$PROJECT_DIR$/imageloader-core-1.6.1/imageloader-core-1.6.1.iml" />
     </modules>
   </component>
 </project>

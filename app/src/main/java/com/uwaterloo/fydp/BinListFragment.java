@@ -1,14 +1,26 @@
 package com.uwaterloo.fydp;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
+import com.uwaterloo.fydp.adapter.BinListAdapter;
+import com.uwaterloo.fydp.api.ApplicationException;
+import com.uwaterloo.fydp.constants.BinSystemConstants;
+import com.uwaterloo.fydp.domain.Bin;
 import com.uwaterloo.fydp.dummy.DummyContent;
+import com.uwaterloo.fydp.resource.BinResource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A list fragment representing a list of Bins. This fragment
@@ -37,6 +49,9 @@ public class BinListFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    BinListAdapter adapter;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -71,12 +86,28 @@ public class BinListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+        adapter = new BinListAdapter(getActivity(), R.layout.activity_bin_list_item, new ArrayList<Bin>());
+        setListAdapter(adapter);
+
+        new GetBinsBySystemIdTask().execute();
+}
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_bin_list, container, false);
+
+        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.fragment_bin_list_swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new GetBinsBySystemIdTask().execute();
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -148,5 +179,41 @@ public class BinListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
+    }
+
+    private class GetBinsBySystemIdTask extends AsyncTask<Void, Void, List<Bin>> {
+
+        boolean getBinsSuccessful = true;
+
+        @Override
+        protected List<Bin> doInBackground(Void... params) {
+            List<Bin> bins = null;
+
+            try {
+                bins = BinResource.getBinsBySystemId(BinSystemConstants.BIN_SYSTEM_ID);
+            } catch (ApplicationException e) {
+                getBinsSuccessful = false;
+                e.printStackTrace();
+            }
+
+            return bins;
+        }
+
+        @Override
+        protected void onPostExecute(List<Bin> bins) {
+            swipeRefreshLayout.setRefreshing(false);
+
+            if(getBinsSuccessful) {
+                if(bins != null) {
+                    adapter.clear();
+                    adapter.addAll(bins);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+            else {
+                String message = getResources().getString(R.string.loading_bins_failed);
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

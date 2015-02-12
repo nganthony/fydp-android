@@ -1,1 +1,1 @@
-include ':app', ':fydp-android-lib'
+include ':app', ':fydp-android-lib', ':imageloader-core-1.6.1'

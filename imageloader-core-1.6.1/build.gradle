@@ -1,0 +1,2 @@
+configurations.create("default")
+artifacts.add("default", file('imageloader-core-1.6.1.jar'))

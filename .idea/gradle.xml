@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/fydp-android-lib" />
+            <option value="$PROJECT_DIR$/imageloader-core-1.6.1" />
           </set>
         </option>
       </GradleProjectSettings>

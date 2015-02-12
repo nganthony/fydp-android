@@ -23,4 +23,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.androidplot:androidplot-core:0.6.1'
+    compile 'com.android.support:cardview-v7:21.0.+'
+    compile project(':fydp-android-lib')
+    compile project(':imageloader-core-1.6.1')
 }
