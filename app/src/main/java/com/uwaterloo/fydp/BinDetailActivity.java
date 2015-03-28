@@ -39,8 +39,8 @@ public class BinDetailActivity extends Activity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(BinDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(BinDetailFragment.ARG_ITEM_ID));
+            arguments.putString(BinDetailFragment.ARG_BIN_ITEM,
+                    getIntent().getStringExtra(BinDetailFragment.ARG_BIN_ITEM));
             BinDetailFragment fragment = new BinDetailFragment();
             fragment.setArguments(arguments);
             getFragmentManager().beginTransaction()

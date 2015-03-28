@@ -4,5 +4,7 @@
     <string name="app_name">Automated Inventory Replenishment System</string>
     <string name="title_bin_detail">Bin Detail</string>
     <string name="loading_bins_failed">Loading bins failed</string>
+    <string name="purchase">Purchase</string>;
+    <string name="mark_as_purchased">Mark as purchased</string>
 
 </resources>

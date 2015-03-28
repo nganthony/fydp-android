@@ -8,5 +8,5 @@ public class Constants {
     //public static String BASEURL = "";
 
     // Localhost
-    public static String BASEURL = "http://172.31.203.176:8080/fydp";
+    public static String BASEURL = "http://waterloofydp.elasticbeanstalk.com";
 }

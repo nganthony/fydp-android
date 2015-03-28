@@ -1,8 +1,9 @@
 package com.uwaterloo.fydp.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Bin {
+public class Bin implements Serializable {
     private int id;
     private int binSystemId;
     private String name;
@@ -11,6 +12,7 @@ public class Bin {
     private String purchaseUrl;
     private double massPerItem;
     private double totalMass;
+    private double currentMass;
     private Timestamp createdTimestamp;
 
     public int getId() {
@@ -75,6 +77,14 @@ public class Bin {
 
     public void setTotalMass(double totalMass) {
         this.totalMass = totalMass;
+    }
+
+    public double getCurrentMass() {
+        return currentMass;
+    }
+
+    public void setCurrentMass(double currentMass) {
+        this.currentMass = currentMass;
     }
 
     public Timestamp getCreatedTimestamp() {
